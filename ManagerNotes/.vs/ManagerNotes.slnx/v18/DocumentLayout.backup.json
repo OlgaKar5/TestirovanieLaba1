@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\\u041C\u0414\u041A 01.02 \u041F\u043E\u0434\u0434\u0435\u0440\u0436. \u0438 \u0442\u0435\u0441\u0442\u0438\u0440\u043E\u0432. \u041F\u041C\\Laba1\\ManagerNotes\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{62F10BC0-FFCA-49CB-BC69-2CF7B71DD4E9}|ManagerNotes\\ManagerNotes.csproj|e:\\\u043C\u0434\u043A 01.02 \u043F\u043E\u0434\u0434\u0435\u0440\u0436. \u0438 \u0442\u0435\u0441\u0442\u0438\u0440\u043E\u0432. \u043F\u043C\\laba1\\managernotes\\managernotes\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{62F10BC0-FFCA-49CB-BC69-2CF7B71DD4E9}|ManagerNotes\\ManagerNotes.csproj|solutionrelative:managernotes\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "E:\\\u041C\u0414\u041A 01.02 \u041F\u043E\u0434\u0434\u0435\u0440\u0436. \u0438 \u0442\u0435\u0441\u0442\u0438\u0440\u043E\u0432. \u041F\u041C\\Laba1\\ManagerNotes\\ManagerNotes\\Form1.cs",
+              "RelativeDocumentMoniker": "ManagerNotes\\Form1.cs",
+              "ToolTip": "E:\\\u041C\u0414\u041A 01.02 \u041F\u043E\u0434\u0434\u0435\u0440\u0436. \u0438 \u0442\u0435\u0441\u0442\u0438\u0440\u043E\u0432. \u041F\u041C\\Laba1\\ManagerNotes\\ManagerNotes\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "ManagerNotes\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T06:30:01.226Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
