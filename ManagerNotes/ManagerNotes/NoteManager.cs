@@ -55,7 +55,7 @@ namespace ManagerNotes
                         DateTime date;
                         if (DateTime.TryParse(parts[2], out date))
                         {
-                            Notes.Add(new Note(parts[0], parts[1], date));
+                            Notes.Add(new Note(parts[0], parts[1]));
                         }
                     }
                 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ManagerNotes
 {
-    public class NoteForm : Form
+    public partial class NoteForm : Form
     {
         private NoteManager noteManager;
         private TextBox titleTextBox;
