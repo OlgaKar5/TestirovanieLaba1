@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System .Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -38,9 +39,9 @@ namespace ManagerNotes
 
         private void SaveNotes()
         {
-            File.WriteAllLines("notes.txt", Notes.Select(n =>
-    $"{n.Title}|{n.Content}|{n.Date.ToString("yyyy-MM-dd HH:mm:ss")}"));
-        }
+			File .WriteAllLines ( "notes.txt" , Notes .Select ( n =>
+				$"{n .Title}|{n .Content}|{n .Date .ToString ( "yyyy-MM-dd HH:mm:ss" , CultureInfo .InvariantCulture )}" ) );
+		}
 
         private void LoadNotes()
         {
@@ -55,8 +56,8 @@ namespace ManagerNotes
                         DateTime date;
                         if (DateTime.TryParse(parts[2], out date))
                         {
-                            Notes.Add(new Note(parts[0], parts[1]));
-                        }
+							Notes.Add (new Note (parts [0], parts [1], date));
+						}
                     }
                 }
             }

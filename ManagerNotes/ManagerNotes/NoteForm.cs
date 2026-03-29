@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System .Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,10 @@ namespace ManagerNotes
     public partial class NoteForm : Form
     {
         private NoteManager noteManager;
-        private TextBox titleTextBox;
-        private TextBox contentTextBox;
+		private Label titleLabel;
+		private TextBox titleTextBox;
+		private Label contentLabel;
+		private TextBox contentTextBox;
         private Button addNoteButton;
         private ListBox notesListBox;
         private Button removeNoteButton;
@@ -25,16 +28,32 @@ namespace ManagerNotes
             this.Width = 500;
             this.Height = 400;
 
-            titleTextBox = new TextBox
+			titleLabel = new Label
+			{
+				Location = new Point ( 10 , 10 ) ,
+				Text = "Заголовок:" ,
+				AutoSize = true ,
+				Font = new Font ( "Microsoft Sans Serif" , 9 , FontStyle .Regular )
+			};
+
+			titleTextBox = new TextBox
             {
-                Location = new System.Drawing.Point(10, 10),
+                Location = new System.Drawing.Point(10, 25),
                 Width = 200,
 
             };
 
-            contentTextBox = new TextBox
+			contentLabel = new Label
+			{
+				Location = new Point ( 10 , 50 ) ,
+				Text = "Содержание:" ,
+				AutoSize = true ,
+				Font = new Font ( "Microsoft Sans Serif" , 9 , FontStyle .Regular )
+			};
+
+			contentTextBox = new TextBox
             {
-                Location = new System.Drawing.Point(10, 40),
+                Location = new System.Drawing.Point(10, 70),
                 Width = 200,
                 Height = 100,
                 Multiline = true,
@@ -44,7 +63,7 @@ namespace ManagerNotes
 
             addNoteButton = new Button
             {
-                Location = new System.Drawing.Point(10, 150),
+                Location = new System.Drawing.Point(10, 170),
                 Text = "Добавить",
                 Width = 100
             };
@@ -65,33 +84,35 @@ namespace ManagerNotes
             };
             removeNoteButton.Click += RemoveNoteButton_Click;
 
-            this.Controls.Add(titleTextBox);
-            this.Controls.Add(contentTextBox);
-            this.Controls.Add(addNoteButton);
-            this.Controls.Add(notesListBox);
-            this.Controls.Add(removeNoteButton);
+			this .Controls .Add ( titleLabel );        
+			this .Controls .Add ( titleTextBox );
+			this .Controls .Add ( contentLabel );     
+			this .Controls .Add ( contentTextBox );
+			this .Controls .Add ( addNoteButton );
+			this .Controls .Add ( notesListBox );
+			this .Controls .Add ( removeNoteButton );
 
-            noteManager = new NoteManager();
+			noteManager = new NoteManager();
             UpdateNotesList();
         }
 
-        private void UpdateNotesList()
-        {
-            notesListBox.Items.Clear();
-            foreach (var note in noteManager.Notes)
-            {
-                notesListBox.Items.Add($"{note.Title} ({note.Date.ToString("yyyy-MM-dd")})");
-            }
-        }
+		private void UpdateNotesList ( )
+		{
+			notesListBox .Items .Clear ( );
+			foreach ( var note in noteManager .Notes )
+			{
+				notesListBox .Items .Add ( $"{note .Title}|{note .Content}|{note .Date:yyyy-MM-dd HH:mm:ss}" );
+			}
+		}
 
-        private void AddNoteButton_Click(object sender, EventArgs e)
+		private void AddNoteButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(titleTextBox.Text) || string.IsNullOrEmpty(contentTextBox.Text))
             {
                 MessageBox.Show("Заполните все поля!");
                 return;
             }
-            Note newNote = new Note(titleTextBox.Text, contentTextBox.Text);
+            Note newNote = new Note(titleTextBox.Text, contentTextBox.Text , DateTime .Now );
             try
             {
                 noteManager.AddNote(newNote);
@@ -105,37 +126,41 @@ namespace ManagerNotes
             }
         }
 
-        private void RemoveNoteButton_Click(object sender, EventArgs e)
-        {
+       private void RemoveNoteButton_Click(object sender, EventArgs e)
+{
             if (notesListBox.SelectedIndex == -1)
             {
                 MessageBox.Show("Выберите заметку для удаления!");
                 return;
             }
+
             string selectedItem = notesListBox.SelectedItem.ToString();
-            string[] parts = selectedItem.Split(new[] { '(' }, StringSplitOptions.None);
-            if (parts.Length >= 2)
+            string[] parts = selectedItem.Split(new[] { '|' }, 3);
+
+            if (parts.Length == 3)
             {
                 string title = parts[0];
-                DateTime date;
-                if (DateTime.TryParse(parts[1].Split(')')[0], out date))
+                string content = parts[1];
+                string dateStr = parts[2].Trim();
+
+                var noteToRemove = noteManager.Notes.Find(n =>
+                    n.Title == title &&
+                    n.Content == content &&
+                    n.Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) == dateStr);
+
+                if (noteToRemove != null)
                 {
-                    var noteToRemove = noteManager.Notes.Find(n => n.Title == title && n.Date.Date
-    == date.Date);
-                    if (noteToRemove != null)
+                    try
                     {
-                        try
-                        {
-                            noteManager.RemoveNote(noteToRemove);
-                            UpdateNotesList();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                        noteManager.RemoveNote(noteToRemove);
+                        UpdateNotesList();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                 }
             }
         }
-    }
+	}
 }
