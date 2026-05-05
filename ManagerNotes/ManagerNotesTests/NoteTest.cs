@@ -32,7 +32,7 @@ namespace ManagerNotesTests
 
 		[TestMethod]
 		public void Title_CanBeGetAndSet () //Проверка изменения старого заголовка на новый 
-		{
+		{    
 			var note = new Note ("Старый", "Содержимое");
 			note.Title="Новый заголовок";
 			Assert.AreEqual ("Новый заголовок", note.Title);

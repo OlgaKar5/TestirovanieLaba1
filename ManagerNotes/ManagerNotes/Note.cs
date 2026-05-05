@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 
 namespace ManagerNotes
 {
@@ -10,12 +9,27 @@ namespace ManagerNotes
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Date { get; set; }
-
-        public Note(string title, string content, DateTime date )
+        public List<string> Tags { get; set; }
+        public Note(string title, string content, DateTime? date = null)
         {
             Title = title;
             Content = content;
-			Date=date;
-		}
+            Date = date ?? DateTime.Now;
+            Tags = new List<string>();
+        }
+        public void AddTag(string tag)
+        {
+            if (string.IsNullOrWhiteSpace(tag))
+                return;
+            string trimmedTag = tag.Trim();
+            if (!Tags.Any(t => t.Trim().Equals(trimmedTag, StringComparison.OrdinalIgnoreCase)))
+            {
+                Tags.Add(trimmedTag);
+            }
+        }
+        public void RemoveTag(string tag)
+        {
+            Tags.Remove(tag);
+        }
     }
 }

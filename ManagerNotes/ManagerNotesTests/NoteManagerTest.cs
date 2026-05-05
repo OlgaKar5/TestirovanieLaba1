@@ -12,24 +12,25 @@ namespace ManagerNoteTests
 		private const string TestFileName = "notes_test.txt";
 		private NoteManager _manager;
 
-		[TestInitialize] //Подготовка перед тестом
-		public void SetUp () //удаление старого теста и создания нового
-		{
-			if (File.Exists (TestFileName))
-				File.Delete (TestFileName);
-			_manager=new NoteManager ();
-		}
+        [TestInitialize]
+        public void SetUp()
+        {
+            if (File.Exists(TestFileName))
+                File.Delete(TestFileName);
+            if (File.Exists("notes.txt"))
+                File.Delete("notes.txt");
 
-		[TestCleanup] //Очистка после теста
-		public void TearDown () //Удаление тестового файла и файла записи
-		{
-			if (File.Exists (TestFileName))
-				File.Delete (TestFileName);
-			if (File.Exists ("notes.txt"))
-				File.Delete ("notes.txt");
-		}
+            _manager = new NoteManager();
+        }
+        public void TearDown()
+        {
+            if (File.Exists(TestFileName))
+                File.Delete(TestFileName);
 
-		[TestMethod]
+            if (File.Exists("notes.txt"))
+                File.Delete("notes.txt");
+        }
+        [TestMethod]
 		public void Constructor_InitializesNotesList () //Проверка создания и инициализации списка записей
 		{
 			var manager = new NoteManager ();
